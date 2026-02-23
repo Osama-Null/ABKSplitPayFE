@@ -71,10 +71,6 @@ const LoginScreen = ({ setIsAuthenticated }) => {
         await setToken(token);
         Alert.alert("Login Successful");
      setIsAuthenticated(true);
-     navigation.reset({
-          index: 0,
-          routes: [{ name: "MainBottomNavigation" }],
-        });
       } else {
         Alert.alert("Error", "Failed to retrieve token. Please try again.");
       }

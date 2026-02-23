@@ -13,16 +13,22 @@ import React, { useEffect, useRef } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
-import { Video } from "expo-av";
+import { useVideoPlayer, VideoView } from "expo-video";
 
 const { width, height } = Dimensions.get("window");
+
+const videoSource = require("../../../assets/SplitPay_1.mp4");
 
 const OnBoardingScreen = () => {
   const navigation = useNavigation();
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const slideAnim = useRef(new Animated.Value(50)).current;
   const scaleAnim = useRef(new Animated.Value(0.9)).current;
-  const videoRef = useRef(null);
+  const player = useVideoPlayer(videoSource, (player) => {
+    player.loop = true;
+    player.muted = true;
+    player.play();
+  });
 
   useEffect(() => {
     Animated.parallel([
@@ -69,15 +75,11 @@ const OnBoardingScreen = () => {
             end={{ x: 1, y: 1 }}
           >
             <View style={styles.logoWrapper}>
-              <Video
-                ref={videoRef}
-                source={require("../../../assets/SplitPay_1.mp4")}
+              <VideoView
+                player={player}
                 style={styles.video}
-                resizeMode="cover"
-                shouldPlay
-                isLooping
-                isMuted
-           
+                contentFit="cover"
+                nativeControls={false}
               />
             </View>
           </LinearGradient>

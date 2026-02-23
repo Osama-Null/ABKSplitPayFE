@@ -37,8 +37,16 @@ const register = async (userInfo) => {
         "The request timed out. Please check your network and try again."
       );
     }
+    if (error.response) {
+      const data = error.response.data;
+      const message =
+        data?.title ||
+        (Array.isArray(data) ? data.map((e) => e.description).join("\n") : null) ||
+        "Registration failed.";
+      throw new Error(message);
+    }
     throw new Error(
-      "Registration failed. Please check your network and try again."
+      "Network error: Unable to connect to the server. Please ensure the server is running and accessible."
     );
   }
 };

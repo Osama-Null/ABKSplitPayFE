@@ -31,15 +31,16 @@ const AccountNavigation = ({ setIsAuthenticated }) => {
     >
       <Stack.Screen
         name="MainAccPageScreen"
-        component={() => (
-          <MainAccPageScreen setIsAuthenticated={setIsAuthenticated} />
-        )} // Pass setIsAuthenticated to MainAccPageScreen
         options={{
           animationEnabled: true,
           headerShown: false,
           header: () => null,
         }}
-      />
+      >
+        {(props) => (
+          <MainAccPageScreen {...props} setIsAuthenticated={setIsAuthenticated} />
+        )}
+      </Stack.Screen>
 
       <Stack.Screen
         name="EditProfileScreen"

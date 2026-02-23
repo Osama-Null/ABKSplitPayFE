@@ -1,5 +1,6 @@
 import {
   Platform,
+  StatusBar,
   StyleSheet,
   Text,
   TouchableOpacity,

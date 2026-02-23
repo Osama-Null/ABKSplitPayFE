@@ -82,12 +82,6 @@ const RegisterScreen = ({ setIsAuthenticated }) => {
         Alert.alert("Registration Successful");
 
         setIsAuthenticated(true);
-
-   
-        navigation.reset({
-          index: 0,
-          routes: [{ name: "MainBottomNavigation" }],
-        });
       } else {
         Alert.alert("Error", "Failed to retrieve token. Please try again.");
       }
